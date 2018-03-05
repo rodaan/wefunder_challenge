@@ -8,6 +8,7 @@ class UserMailer < ApplicationMailer
   end
 
   def test_email
+    puts('sending...')
     mail(to: 'rodaan.rabang@gmail.com', subject: 'This is a test email')
   end
 end
