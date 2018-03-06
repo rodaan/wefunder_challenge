@@ -1,4 +1,34 @@
-<h2>Hello World</h2>
+<h2>Welcome to SFOSL</h2>
 <p>
   The time is now: <%= Time.now %>
 </p>
+<% if user_signed_in? %>
+  <div>Signed in as... <%= current_user.email %></div>
+  <%= link_to "Create New Tournament", 'tournaments/new' %>
+  <h1>Live Tournaments</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Number of Players</th>
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% current_user.tournaments.each do |tournament| %>
+        <tr>
+          <td><%= tournament.name %></td>
+          <td><%= tournament.start_date %></td>
+          <td><%= tournament.end_date %></td>
+          <td><%= tournament.num_players %></td>
+          <td><%= link_to 'Add Player', [tournament, :players] %></td>
+          <td><%= link_to 'Start Tournament', [tournament], :method => :put %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
